@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Deel je tips - Anti-Dark</title>
+    <meta name="description" content="Deel meningen en tips over dark patterns.">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;700&family=Oswald:wght@600&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/logo.png">
+    <script src="js/script.js" defer></script>
+</head>
+<body data-page="tips">
+    <main id="main">
+
+        <h1 class="center">Deel je meningen en tips over</h1>
+        <p class="sub center">Dark patterns</p>
+
+        <!-- --- FORMULIER: NIEUWE TIP --- -->
+        <section class="card solid" id="nieuw">
+            <h2>Plaats een nieuwe tip</h2>
+            <form id="new-tip" novalidate>
+                <label for="n1">Je naam</label>
+                <input id="n1" name="naam" maxlength="30" autocomplete="nickname">
+
+                <label for="n2">Hoofdstelling / voorbeeld</label>
+                <input id="n2" name="titel" maxlength="60">
+                <p class="help">Bijvoorbeeld: 'Afmelden lukt niet'.</p>
+
+                <label for="n3">Jouw tip of mening</label>
+                <textarea id="n3" name="tekst" rows="3" maxlength="400"></textarea>
+                <p class="help">Deel geen persoonlijke gegevens. Tips blijven op dit apparaat (demo).</p>
+
+                <p id="tip-msg" role="alert"></p>
+                <p><button class="btn">Plaats tip</button></p>
+            </form>
+        </section>
+
+        <!-- --- LIJST MET TIPS --- -->
+        <h2 style="margin-top:2rem">Tips en reacties</h2>
+        <p class="help">De berichten met 'Voorbeeld' zijn demo-berichten.</p>
+
+        <!-- De tips worden door script.js in #posts gezet -->
+        <div id="posts"></div>
+        <p><button class="btn btn-second" id="reset-tips">Voorbeeldberichten herstellen</button></p>
+
+    </main>
+</body>
+</html>

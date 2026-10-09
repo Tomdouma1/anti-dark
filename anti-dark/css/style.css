@@ -1,0 +1,577 @@
+/* Anti-Dark - Ewan en Tom V2 */
+/* Kleuren komen uit de mockup (blauwgrijs, paarse knoppen) en het logo (groen/zwart) */
+
+/* --- KLEUREN EN MATEN --- */
+:root {
+    --bar: #c7d0db;
+    --pill: #a9b7c6;
+    --pill-hover: #93a5b8;
+    --ink: #1c1c1e;
+    --muted: #4a5058;
+    --bg: #fff;
+    --cta1: #6a12c9;
+    --cta2: #a35cf0;
+    --good: #1f9d74;
+    --good-dark: #0b5a44;
+    --bad: #2b2b2d;
+    --warn: #b3261e;
+    --r-s: 8px;
+    --r-m: 16px;
+    --r-l: 24px;
+    --sp-s: .5rem;
+    --sp-m: 1rem;
+    --sp-l: 2rem;
+    --shadow: 0 2px 8px rgba(0, 0, 0, .15);
+}
+
+/* --- BASIS --- */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 112.5%;
+}
+
+body {
+    margin: 0;
+    font-family: "Open Sans", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+}
+
+h1, h2, h3 {
+    font-family: Oswald, "Arial Narrow", Impact, sans-serif;
+    font-weight: 600;
+    line-height: 1.15;
+    margin: 0 0 var(--sp-s);
+}
+
+h1 { font-size: 2.4rem; }
+h2 { font-size: 1.4rem; }
+
+.sub, .label {
+    font-family: Lato, Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-weight: 700;
+    font-size: .85rem;
+}
+
+.sub {
+    margin: 0 0 var(--sp-m);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    color: var(--cta1);
+}
+
+:focus-visible {
+    outline: 3px solid var(--cta1);
+    outline-offset: 2px;
+}
+
+/* Skiplink: alleen zichtbaar met toetsenbord */
+.skip {
+    position: absolute;
+    left: -999px;
+}
+
+.skip:focus {
+    left: var(--sp-m);
+    top: var(--sp-s);
+    background: #fff;
+    padding: var(--sp-s);
+    z-index: 10;
+}
+
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: var(--sp-l) var(--sp-m);
+}
+
+.center {
+    text-align: center;
+}
+
+/* --- HEADER EN MENU --- */
+/* Header is compact gemaakt (feedback: menu kleiner) */
+.site-header {
+    background: var(--bar);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-m);
+    padding: .4rem var(--sp-m);
+    flex-wrap: wrap;
+}
+
+.site-header .logo img {
+    height: 42px;
+    display: block;
+}
+
+.site-nav {
+    display: flex;
+    gap: .4rem;
+    flex-wrap: wrap;
+}
+
+.site-nav a {
+    background: var(--pill);
+    color: var(--ink);
+    text-decoration: none;
+    font-family: Lato, Arial, sans-serif;
+    font-weight: 700;
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    padding: .5rem .9rem;
+    border-radius: var(--r-m);
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.site-nav a:hover {
+    background: var(--pill-hover);
+}
+
+/* Huidige pagina is zwart */
+.site-nav a[aria-current=page] {
+    background: var(--ink);
+    color: #fff;
+}
+
+/* Menuknop is alleen op de telefoon zichtbaar */
+.menu-btn {
+    display: none;
+    min-height: 44px;
+    border: 2px solid var(--ink);
+    background: #fff;
+    border-radius: var(--r-m);
+    padding: 0 1rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .menu-btn {
+        display: block;
+    }
+
+    .site-nav {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .site-nav.open {
+        display: flex;
+    }
+
+    .site-nav a {
+        min-height: 44px;
+    }
+}
+
+/* --- KNOPPEN --- */
+/* Maar 1 stijl, met een tweede variant (btn-second) */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: .5rem 1.4rem;
+    border-radius: var(--r-s);
+    border: 1px solid var(--cta1);
+    background: linear-gradient(90deg, var(--cta1), var(--cta2));
+    color: #fff;
+    font: 700 1rem Arial, sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    filter: brightness(1.1);
+}
+
+.btn-second {
+    background: #bfe0ff;
+    color: #000;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+}
+
+.btn:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.cta-row {
+    display: flex;
+    gap: var(--sp-m);
+    flex-wrap: wrap;
+    margin-top: var(--sp-m);
+}
+
+/* --- KAARTEN EN GRID --- */
+/* Gestippelde rand uit de mockup, overal hetzelfde */
+.card {
+    border: 2px dashed var(--ink);
+    border-radius: var(--r-l);
+    padding: 1.25rem;
+    background: #fff;
+}
+
+.card.solid {
+    border: 3px solid var(--ink);
+}
+
+.grid2, .grid3 {
+    display: grid;
+    gap: var(--sp-m);
+}
+
+.grid2 {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+}
+
+.grid3 {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    margin-top: var(--sp-l);
+}
+
+.steps {
+    list-style: none;
+    padding: 0;
+}
+
+.steps .card {
+    background: var(--bar);
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-s);
+    justify-content: space-between;
+}
+
+.hero {
+    max-width: 640px;
+}
+
+ul.clean {
+    padding-left: 1.2rem;
+    margin: .5rem 0;
+}
+
+/* --- VOORBEELD-MOCKUPS --- */
+/* Zelfgemaakte voorbeeldschermen */
+.mockwrap {
+    position: relative;
+    border: 6px solid #f2f2f2;
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    background: #fff;
+    min-height: 190px;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+    justify-content: center;
+    border-radius: var(--r-s);
+}
+
+.tag {
+    position: absolute;
+    top: -14px;
+    left: 12px;
+    background: var(--bad);
+    color: #fff;
+    font-size: .75rem;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 999px;
+    text-transform: uppercase;
+}
+
+.is-good .tag {
+    background: var(--good-dark);
+}
+
+.mock p {
+    margin: 0;
+    font-size: .9rem;
+}
+
+.m-row {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.m-btn {
+    border: 0;
+    border-radius: var(--r-s);
+    padding: .6rem 1rem;
+    font-weight: 700;
+    font-size: .9rem;
+    background: var(--good);
+    color: #fff;
+    cursor: default;
+}
+
+.m-btn.big {
+    padding: .9rem 1.6rem;
+    font-size: 1.05rem;
+}
+
+.m-btn.plain {
+    background: #eee;
+    color: #222;
+    border: 1px solid #999;
+}
+
+/* Bijna onzichtbare tekst (zo doen dark patterns het) */
+.m-faint {
+    color: #d0d0d0;
+    font-size: .7rem;
+    text-decoration: underline;
+}
+
+.m-red {
+    color: var(--warn);
+    font-weight: 700;
+}
+
+.m-price {
+    font-size: .85rem;
+    color: var(--muted);
+}
+
+/* --- CARROUSEL (voorbeelden) --- */
+.carousel {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--sp-s);
+    align-items: center;
+    margin-top: var(--sp-m);
+}
+
+.arrow {
+    width: 48px;
+    height: 72px;
+    font-size: 2.4rem;
+    background: #fff;
+    border: 3px solid var(--ink);
+    border-radius: var(--r-m);
+    cursor: pointer;
+}
+
+.arrow:hover {
+    background: var(--bar);
+}
+
+.ex {
+    display: grid;
+    gap: var(--sp-l);
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+@media (max-width: 700px) {
+    .ex {
+        grid-template-columns: 1fr;
+    }
+
+    .arrow {
+        width: 36px;
+    }
+}
+
+.hint {
+    font-size: .9rem;
+    color: var(--muted);
+    margin: .4rem 0 0;
+}
+
+/* --- QUIZ --- */
+.progress {
+    height: 10px;
+    background: var(--bar);
+    border-radius: 99px;
+    overflow: hidden;
+    margin: var(--sp-s) 0 var(--sp-m);
+}
+
+.progress span {
+    display: block;
+    height: 100%;
+    background: var(--good);
+    transition: width .3s;
+}
+
+.quiz-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-l);
+    align-items: center;
+}
+
+@media (max-width: 800px) {
+    .quiz-body {
+        grid-template-columns: 1fr;
+    }
+}
+
+.options {
+    display: grid;
+    gap: .6rem;
+}
+
+.opt {
+    display: flex;
+    gap: .8rem;
+    align-items: center;
+    text-align: left;
+    font: inherit;
+    padding: .6rem .9rem;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: var(--r-m);
+    cursor: pointer;
+    min-height: 56px;
+}
+
+.opt b {
+    font: 600 1.8rem Oswald, sans-serif;
+}
+
+.opt:hover:not(:disabled) {
+    background: var(--bar);
+}
+
+/* Goed antwoord groen, fout antwoord rood */
+.opt.right {
+    background: #d6f3e8;
+    border-color: var(--good-dark);
+}
+
+.opt.wrong {
+    background: #fde3e1;
+    border-color: var(--warn);
+}
+
+.feedback {
+    min-height: 3.2rem;
+    margin: var(--sp-m) 0;
+    font-weight: 700;
+}
+
+/* --- TIPS (formulieren en berichten) --- */
+label {
+    display: block;
+    font-weight: 700;
+    margin-top: .8rem;
+}
+
+input, textarea {
+    width: 100%;
+    font: inherit;
+    padding: .6rem;
+    border: 2px solid var(--ink);
+    border-radius: var(--r-s);
+}
+
+.help {
+    font-size: .85rem;
+    color: var(--muted);
+    margin: .2rem 0 0;
+}
+
+.error {
+    color: var(--warn);
+    font-weight: 700;
+    margin: .3rem 0 0;
+}
+
+.ok {
+    color: var(--good-dark);
+    font-weight: 700;
+}
+
+.post {
+    margin-top: var(--sp-m);
+}
+
+.post header {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--sp-s);
+    flex-wrap: wrap;
+}
+
+.reply {
+    border: 2px dashed var(--ink);
+    border-radius: var(--r-m);
+    padding: .6rem 1rem;
+    margin: .6rem 0;
+}
+
+.reply b, .by {
+    font-family: Lato, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: .8rem;
+}
+
+.link-btn {
+    background: none;
+    border: 0;
+    color: var(--warn);
+    text-decoration: underline;
+    cursor: pointer;
+    font: inherit;
+    min-height: 44px;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: 700;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+}
+
+/* --- ZOEKRESULTATEN --- */
+.results {
+    list-style: none;
+    padding: 0;
+}
+
+.results li {
+    margin: .6rem 0;
+}
+
+/* --- FOOTER --- */
+.site-footer {
+    background: var(--bar);
+    padding: var(--sp-m);
+    text-align: center;
+    font-size: .85rem;
+    margin-top: var(--sp-l);
+}
+
+.site-footer a {
+    margin: 0 .4rem;
+}
